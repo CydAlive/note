@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>移动广告</title>
+</head>
+<style type="text/css">
+	*{
+		padding: 0px;
+		margin: 0px;	
+	}
+	#h1{
+		width: 300px;
+		height: 200px;
+		border: 1px solid red;
+		background: url(images/跳动广告.jpg) no-repeat;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	#h1 img{
+		width: 30px;
+		height: 30px;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		var hd= document.getElementById('h1');
+		var cl= document.getElementById('close');
+		
+		var win_width = document.documentElement.clientWidth;
+		var win_height = document.documentElement.clientHeight;
+		
+		var max_left = win_width - hd.offsetWidth;
+		var max_top = win_height - hd.offsetHeight;
+		var x = 1;
+		var y = 1;
+
+		function run(){
+			
+			var old_left = hd.offsetLeft;
+			var old_top = hd.offsetTop;
+
+			var new_left = old_left + x;
+			var new_top = old_top + y;
+
+			hd.style.left = new_left + 'px';
+			hd.style.top = new_top + 'px';
+
+			if (new_top == max_top) {
+				y = -1;
+ 			}
+ 			if (new_top == 0){
+ 				y = 1;
+ 			}
+ 			if (new_left == max_left) {
+ 				x = -1;
+ 			}
+ 			if (new_left == 0){
+ 				x = 1;
+ 			}
+		}
+		
+		var timer = setInterval(run,1);
+		
+		hd.onmouseover = function(){
+			clearInterval(timer);
+		}
+		hd.onmouseout = function(){
+			timer = setInterval(run,1);
+		}
+		cl.onclick = function(){
+			hd.style.display = 'none'
+		}
+		window.onresize = function(){
+			hd.style.left = 0 ;
+			hd.style.top = 0 ;
+
+			x = 1;
+			y = 1;
+
+			win_width = document.documentElement.clientWidth;
+			win_height = document.documentElement.clientHeight;
+			
+			max_left = win_width - hd.offsetWidth;
+			max_top = win_height - hd.offsetHeight;
+		}
+	}
+</script>
+<body>
+	
+	<div id="h1">
+		<img src="images/删除.jpg" id="close">
+	</div>
+
+</body>
+</html>

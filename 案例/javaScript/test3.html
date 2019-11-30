@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>放大镜</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#left{
+			height: 400px;
+			width: 400px;
+			border: 2px solid black;
+			background: url(images/small.jpg) no-repeat;
+			position: relative;
+			cursor: crosshair;
+			float: left;
+		}
+		#box{
+			width: 200px;
+			height: 200px;
+			background: gray;
+			opacity: 0.6;
+			filter: alpah(opacity=60);
+			position: absolute;
+			left: 0;
+			top: 0;
+			display: none;
+		}
+		#box2{
+			width: 400px;
+			height: 400px;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background: red;
+			opacity: 0;
+		}
+		#right{
+			width: 400px;
+			height: 400px;
+			margin-top: 30px;
+			margin-left: 30px;
+			border: 2px solid white;
+			float: left;
+			overflow: hidden;
+			position: relative;
+			display: none;
+					}
+		#big{
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var left = document.getElementById("left");
+			var box = document.getElementById("box");
+			var box2 = document.getElementById("box2");
+			var right = document.getElementById("right");
+			var big = document.getElementById("big");
+
+			box2.onmouseover = function(){
+				box.style.display = 'block';
+				right.style.display = 'block';
+			}
+			box2.onmouseout = function(){
+				box.style.display = 'none';
+				right.style.display = 'none';
+			}
+			box2.onmousemove = function(e){
+				var ev = window.event || e;
+				var mouse_left = ev.offsetX || ev.layerX;
+				var mouse_top  = ev.offsetY || ev.layerY;
+
+				var box_left = mouse_left - 100;
+				var box_top  = mouse_top  - 100;
+
+				if (box_left < 0) {
+					box_left = 0;
+				}
+				if (box_left > 200) {
+					box_left = 200;
+				}
+				if (box_top < 0) {
+					box_top = 0; 
+				}
+				if (box_top > 200) {
+					box_top = 200;
+				}
+
+				box.style.left = box_left + 'px';
+				box.style.top  = box_top  + 'px';
+
+				big.style.left = box_left * -2 +'px';
+				big.style.top = box_top * -2 +'px';
+
+			}
+
+
+		}
+	</script>
+</head>
+<body style="height: 1000px">
+	<div id="left">
+		<div id="box"></div>
+		<div id="box2"></div>
+	</div>
+	<div id="right">
+		<img src="images/big.jpg" id="big">
+	</div>
+</body>
+</html>

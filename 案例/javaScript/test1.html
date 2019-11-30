@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>倒计时页面跳转</title>
+
+	<script type="text/javascript">
+		window.onload = function(){
+		var one = document.getElementById("demo1");
+		setInterval(
+			function(){
+				var two = one.innerHTML;
+
+				var there = two - 1;
+				
+				one.innerHTML = there;
+				if (there == 0) {
+					location.assign('https://www.baidu.com');
+				}
+			},1000);		
+		}
+		
+
+		
+	</script>
+</head>
+<body>
+	<p>抱歉，您访问页面无应答，<span id="demo1">5</span>秒钟后跳转回<a href="https://home.firefoxchina.cn/">首页</a></p>
+
+</body>
+</html>

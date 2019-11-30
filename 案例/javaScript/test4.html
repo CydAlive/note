@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>tab切换</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#tab{
+			width: 600px;
+			height: 600px;
+			border: 1px solid black;
+			margin: 0 auto;
+		}
+		#tab ul li {
+			list-style: none;
+			float: left;
+			width: 200px;
+			height: 50px;
+			line-height: 50px;
+			font-size: 30px;
+			color: black;
+			text-align: center;
+		}
+		#tab .con{
+			width: 580px;
+			height: 530px;
+			margin: 10px;
+			display: none;
+			float: left;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var tab = document.getElementById('tab');
+			var lis = tab.getElementsByTagName('li');
+			var cons = tab.getElementsByClassName('con');
+			for (var i = 0; i < lis.length; i++) {
+				lis[i].xuhao = i;
+				lis[i].onclick = function(){
+					for(var i = 0; i < lis.length; i++){
+						cons[i].style.display = 'none';
+					}
+					cons[this.xuhao].style.display = 'block';
+				}			
+			}
+		}
+	</script>
+</head>
+<body>	
+	<div id="tab">
+		<ul>
+			<li style="background: blue">新闻</li>
+			<li style="background: red">图片</li>
+			<li style="background: green">头条</li>
+		</ul>
+		<div class="con" style="background: blue;display: block;"></div>
+		<div class="con" style="background: red;display: none;"></div>
+		<div class="con" style="background: green;display: none;"></div>
+	</div>
+</body>
+</html>
