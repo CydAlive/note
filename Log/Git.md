@@ -43,3 +43,9 @@ git push origin本地分支名:远程分支名：将分支推送到远程仓库
 4. ssh-keygen -t rsa -C "邮箱"
 5. 打开id_rsa.pub查看是否为自己设置的邮箱，如果不是删掉，重复以上操作。
 
+## ？问题
+
+```shelll
+创建仓库时没有取消  git push -u origin master  选项造成无法提交（2019/12/11）
+```
+
