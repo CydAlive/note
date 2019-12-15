@@ -16,5 +16,9 @@
   因为环境变量问题，导致vue2.9.6版本无法卸载，将npm环境变量改为正确的路径解决
   ```
   
-+ 
 
+### 2.element ui 使用时遇到的问题
+
+1. form 表单组件中 prop验证规则需要和v-model绑定的名字一致
+
+![Snipaste_2019-12-15_18-00-05](F:\note\Log\VUE\images\Snipaste_2019-12-15_18-00-05.png)
