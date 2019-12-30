@@ -1,12 +1,12 @@
-###今日目标
+### 今日目标
 1.实现后台首页的基本布局
 2.实现左侧菜单栏
 3.实现用户列表展示
 4.实现添加用户
 
-
-###1.后台首页基本布局
+### 1.后台首页基本布局
 打开Home.vue组件，进行布局：
+
 ```
 <el-container class="home-container">
   <!-- 头部区域 -->
@@ -37,7 +37,8 @@
 }
 ```
 
-###2.顶部布局，侧边栏布局
+### 2.顶部布局，侧边栏布局
+
 ```
 <template>
     <el-container class="home-container">
@@ -90,9 +91,10 @@
 </template>
 ```
 
-###3.axios请求拦截器
+### 3.axios请求拦截器
 后台除了登录接口之外，都需要token权限验证，我们可以通过添加axios请求拦截器来添加token，以保证拥有获取数据的权限
 在main.js中添加代码，在将axios挂载到vue原型之前添加下面的代码
+
 ```
 //请求在到达服务器之前，先会调用use中的这个回调函数来添加请求头信息
 axios.interceptors.request.use(config=>{
@@ -102,7 +104,8 @@ axios.interceptors.request.use(config=>{
 })
 ```
 
-###4.请求侧边栏数据
+### 4.请求侧边栏数据
+
 ```
 <script>
 export default {
@@ -162,10 +165,11 @@ export default {
 </el-menu>
 ```
 
-###5.设置激活子菜单样式
+### 5.设置激活子菜单样式
 通过更改el-menu的active-text-color属性可以设置侧边栏菜单中点击的激活项的文字颜色
 通过更改菜单项模板（template）中的i标签的类名，可以将左侧菜单栏的图标进行设置，我们需要在项目中使用第三方字体图标
 在数据中添加一个iconsObj：
+
 ```
 iconsObj: {
         '125':'iconfont icon-user',
@@ -180,8 +184,9 @@ iconsObj: {
 为了保持左侧菜单每次只能打开一个，显示其中的子菜单，我们可以在el-menu中添加一个属性unique-opened
 或者也可以数据绑定进行设置(此时true认为是一个bool值，而不是字符串) :unique-opened="true"
 
-###6.制作侧边菜单栏的伸缩功能
+### 6.制作侧边菜单栏的伸缩功能
 在菜单栏上方添加一个div
+
 ```
         <!-- 侧边栏,宽度根据是否折叠进行设置 -->
         <el-aside :width="isCollapse ? '64px':'200px'">
@@ -195,8 +200,7 @@ iconsObj: {
 ```
 然后给div添加样式，给div添加事件：
 <div class="toggle-button" @click="this.isCollapse ? '64px':'200px'">|||</div>
-
-###7.在后台首页添加子级路由
+### 7.在后台首页添加子级路由
 新增子级路由组件Welcome.vue
 在router.js中导入子级路由组件，并设置路由规则以及子级路由的默认重定向
 打开Home.vue，在main的主体结构中添加一个路由占位符
@@ -206,7 +210,7 @@ iconsObj: {
 属性进行路由跳转,如: /110,
 使用index id来作为跳转的路径不合适，我们可以重新绑定index的值为  :index="'/'+subItem.path"
 
-###8.完成用户列表主体区域
+### 8.完成用户列表主体区域
 新建用户列表组件  user/Users.vue
 在router.js中导入子级路由组件Users.vue，并设置路由规则
 
@@ -225,10 +229,11 @@ saveNavState( path ){
 最后在created中将sessionStorage中的数据赋值给activePath
 this.activePath = window.sessionStorage.getItem("activePath")
 
-###9.绘制用户列表基本结构
+### 9.绘制用户列表基本结构
 A.使用element-ui面包屑组件完成顶部导航路径(复制面包屑代码，在element.js中导入组件Breadcrumb,BreadcrumbItem)
 B.使用element-ui卡片组件完成主体表格(复制卡片组件代码，在element.js中导入组件Card)，再使用element-ui输入框完成搜索框及搜索按钮，
 此时我们需要使用栅格布局来划分结构(复制卡片组件代码，在element.js中导入组件Row，Col)，然后再使用el-button制作添加用户按钮
+
 ```
 <div>
     <h3>用户列表组件</h3>
@@ -254,7 +259,8 @@ B.使用element-ui卡片组件完成主体表格(复制卡片组件代码，在e
     </el-card>
 </div>
 ```
-###10.请求用户列表数据
+### 10.请求用户列表数据
+
 ```
 <script>
 export default {
@@ -291,7 +297,7 @@ export default {
 }
 </script>
 ```
-###11.将用户列表数据展示
+### 11.将用户列表数据展示
 使用表格来展示用户列表数据，使用element-ui表格组件完成列表展示数据(复制表格代码，在element.js中导入组件Table,TableColumn)
 在渲染展示状态时，会使用作用域插槽获取每一行的数据
 再使用switch开关组件展示状态信息(复制开关组件代码，在element.js中导入组件Switch)
@@ -299,6 +305,7 @@ export default {
 在操作列中包含了修改，删除，分配角色按钮，当我们把鼠标放到分配角色按钮上时
 希望能有一些文字提示，此时我们需要使用文字提示组件(复制文字提示组件代码，在element.js中导入组件Tooltip),将分配角色按钮包含
 代码结构如下：
+
 ```
 <!-- 用户列表(表格)区域 -->
 <el-table :data="userList" border stripe>
@@ -327,9 +334,10 @@ export default {
 </el-table>
 ```
 
-###12.实现用户列表分页
+### 12.实现用户列表分页
 A.使用表格来展示用户列表数据，可以使用分页组件完成列表分页展示数据(复制分页组件代码，在element.js中导入组件Pagination)
 B.更改组件中的绑定数据
+
 ```
 <!-- 分页导航区域 
 @size-change(pagesize改变时触发) 
@@ -360,7 +368,7 @@ handleCurrentChange( current ) {
 }
 ```
 
-###13.实现更新用户状态
+### 13.实现更新用户状态
 当用户点击列表中的switch组件时，用户的状态应该跟随发生改变。
 A.首先监听用户点击switch组件的事件，并将作用域插槽的数据当做事件参数进行传递
 
@@ -386,9 +394,10 @@ async userStateChanged(row) {
 },
 ```
 
-###14.实现搜索功能
+### 14.实现搜索功能
 添加数据绑定，添加搜索按钮的点击事件(当用户点击搜索按钮的时候，调用getUserList方法根据文本框内容重新请求用户列表数据)
 当我们在输入框中输入内容并点击搜索之后，会按照搜索关键字搜索，我们希望能够提供一个X删除搜索关键字并重新获取所有的用户列表数据，只需要给文本框添加clearable属性并添加clear事件，在clear事件中重新请求数据即可
+
 ```
 <el-col :span="7">
     <el-input placeholder="请输入内容" v-model="queryInfo.query" clearable @clear="getUserList">
@@ -397,7 +406,7 @@ async userStateChanged(row) {
 </el-col>
 ```
 
-###15.实现添加用户
+### 15.实现添加用户
 A.当我们点击添加用户按钮的时候，弹出一个对话框来实现添加用户的功能，首先我们需要复制对话框组件的代码并在element.js文件中引入Dialog组件
 
 B.接下来我们要为“添加用户”按钮添加点击事件，在事件中将addDialogVisible设置为true，即显示对话框

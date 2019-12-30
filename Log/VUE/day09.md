@@ -1,4 +1,4 @@
-###今日目标
+### 今日目标
 1.修改用户,删除用户 
 
 2.推送代码到码云 
@@ -11,10 +11,11 @@
 
 
 
-###1.修改用户信息
+### 1.修改用户信息
 A.为用户列表中的修改按钮绑定点击事件
 B.在页面中添加修改用户对话框，并修改对话框的属性
 C.根据id查询需要修改的用户数据
+
 ```
 //展示编辑用户的对话框
 async showEditDialog(id) {
@@ -105,12 +106,13 @@ editUser() {
 }
 ```
 
-###2.删除用户
+### 2.删除用户
 在点击删除按钮的时候，我们应该跳出提示信息框，让用户确认要进行删除操作。
 如果想要使用确认取消提示框，我们需要先将提示信息框挂载到vue中。
 A.导入MessageBox组件，并将MessageBox组件挂载到实例。
 Vue.prototype.$confirm = MessageBox.confirm
 B.给用户列表中的删除按钮添加事件，并在事件处理函数中弹出确定取消窗,最后再根据id发送删除用户的请求
+
 ```
 async removeUserById(id){
     //弹出确定取消框，是否删除用户
@@ -135,7 +137,7 @@ async removeUserById(id){
 }
 ```
 
-###3.推送代码
+### 3.推送代码
 创建user子分支，并将代码推送到码云
 A.创建user子分支  git checkout -b user
 B.将代码添加到暂存区 git add .
@@ -150,9 +152,10 @@ F.将本地master分支的代码推送到码云  git push
 A.创建rights子分支 git checkout -b rights
 B.将本地的rights分支推送到码云 git push -u origin rights
 
-###4.权限列表
-####A.添加权限列表路由
+### 4.权限列表
+#### A.添加权限列表路由
 创建权限管理组件（Rights.vue），并在router.js添加对应的路由规则
+
 ```
 import Rights from './components/power/Rights.vue'
 ......
@@ -163,10 +166,11 @@ import Rights from './components/power/Rights.vue'
       ]
 ......
 ```
-####B.添加面包屑导航
+#### B.添加面包屑导航
 在Rights.vue中添加面包屑组件展示导航路径
 ####C.显示数据
 在data中添加一个rightsList数据，在methods中提供一个getRightsList方法发送请求获取权限列表数据，在created中调用这个方法获取数据
+
 ```
 <el-table :data="rightsList" stripe>
     <el-table-column type="index"></el-table-column>
@@ -205,9 +209,10 @@ export default {
 </script>
 ```
 
-###5.角色列表
-####A.添加角色列表路由
+### 5.角色列表
+#### A.添加角色列表路由
 添加角色列表子组件（power/Roles.vue），并添加对应的规则
+
 ```
 path: '/home', component: Home, redirect: '/welcome', children: [
         { path: "/welcome", component: Welcome },
@@ -216,10 +221,11 @@ path: '/home', component: Home, redirect: '/welcome', children: [
         { path: "/roles", component: Roles  }
       ]
 ```
-####B.添加面包屑导航
+#### B.添加面包屑导航
 在Roles.vue中添加面包屑组件展示导航路径
-####C.显示数据
+#### C.显示数据
 在data中添加一个roleList数据，在methods中提供一个getRoleList方法发送请求获取权限列表数据，在created中调用这个方法获取数据
+
 ```
 <!-- 角色列表区域 -->
 <!-- row-key="id" 是2019年3月提供的新特性，
@@ -263,11 +269,12 @@ export default {
 }
 </script>
 ```
-####D.补充说明
+#### D.补充说明
 之前学习过类似的添加角色，删除角色，编辑角色请参照之前编写过的代码还有接口文档完成效果。
 
-####E.生成权限列表
+#### E.生成权限列表
 使用三重嵌套for循环生成权限下拉列表
+
 ```
 <!-- 添加展开列 -->
 <el-table-column type="expand">
@@ -299,15 +306,16 @@ export default {
     </template>
 </el-table-column>
 ```
-####F.美化样式
+#### F.美化样式
 通过设置global.css中的#app样式min-width:1366px 解决三级权限换行的问题
 ，通过给一级权限el-row添加display:flex,align-items:center的方式解决一级权限垂直居中的问题，二级权限也类似添加，因为需要给多个内容添加，可以将这个样式设置为一个.vcenter{display:flex;align-items:center}
 
-####G.添加权限删除功能
+#### G.添加权限删除功能
 给每一个权限的el-tag添加closable属性，是的权限右侧出现“X”图标
 再给el-tag添加绑定close事件处理函数removeRightById(scope.row,item1.id)
 removeRightById(scope.row,item2.id)
 removeRightById(scope.row,item3.id)
+
 ```
 async removeRightById(role,rightId){
     //弹窗提示用户是否要删除
@@ -336,10 +344,11 @@ async removeRightById(role,rightId){
 }
 ```
 
-####H.完成权限分配功能
+#### H.完成权限分配功能
 先给分配权限按钮添加事件
 <el-button size="mini" type="warning" icon="el-icon-setting" @click="showSetRightDialog">分配权限</el-button>
 在showSetRightDialog函数中请求权限树数据并显示对话框
+
 ```
 async showSetRightDialog() {
     //当点击分配权限按钮时，展示对应的对话框
@@ -363,8 +372,9 @@ async showSetRightDialog() {
     </span>
 </el-dialog>
 
-####I.完成树形结构弹窗
+#### I.完成树形结构弹窗
 在element.js中引入Tree，注册Tree
+
 ```
 <!-- 分配权限对话框 -->
 <el-dialog title="分配权限" :visible.sync="setRightDialogVisible" width="50%" @close="setRightDialogClose">
@@ -507,9 +517,10 @@ export default {
 </script>
 ```
 
-###6.分配角色
+### 6.分配角色
 打开Users.vue，完成分配角色的功能
 A.添加分配角色对话框
+
 ```
 <!-- 分配角色对话框 -->
 <el-dialog title="分配角色" :visible.sync="setRoleDialogVisible" width="50%">
@@ -628,7 +639,7 @@ methods:{
 }
 ```
 
-###7.将代码推送到码云
+### 7.将代码推送到码云
 A.将代码推送到暂存区 git add .
 B.将代码提交到仓库 git commit -m '完成了权限功能开发'
 C.将rights分支代码推送到码云 git push

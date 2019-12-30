@@ -1,8 +1,8 @@
-###今日目标
+### 今日目标
 1.完成项目优化
 2.完成项目上线
 
-###1.项目优化
+### 1.项目优化
 实现步骤：
 A.生成打包报告，根据报告优化项目
 B.第三方库启用CDN
@@ -10,9 +10,10 @@ C.Element-UI组件按需加载
 D.路由懒加载
 E.首页内容定制
 
-###2.添加进度条
+### 2.添加进度条
 给项目添加进度条效果，先打开项目控制台，打开依赖，安装nprogress
 打开main.js，编写如下代码
+
 ```
 //导入进度条插件
 import NProgress from 'nprogress'
@@ -36,9 +37,10 @@ axios.interceptors.response.use(config =>{
 })
 ```
 
-###3.根据报错修改代码
+### 3.根据报错修改代码
 根据ESLint的警告提示更改对应的代码
 在.prettierrc文件中更改设置"printWidth":200,  将每行代码的文字数量更改为200
+
 ```
 {
     "semi":false,
@@ -47,10 +49,11 @@ axios.interceptors.response.use(config =>{
 }
 ```
 
-###4.执行build
+### 4.执行build
 安装一个插件（babel-plugin-transform-remove-console）在项目build阶段移除所有的console信息
 打开项目控制台，点击依赖->开发依赖，输入babel-plugin-transform-remove-console，安装
 打开babel.config.js，编辑代码如下：
+
 ```
 //项目发布阶段需要用到的babel插件
 const productPlugins = []
@@ -78,17 +81,18 @@ module.exports = {
 }
 ```
 
-###5.生成打包报告
+### 5.生成打包报告
 A.命令行形式生成打包报告
 vue-cli-service build --report
 B.在vue控制台生成打包报告
 点击“任务”=>“build”=>“运行”
 运行完毕之后点击右侧“分析”，“控制台”面板查看报告
 
-###6.修改webpack的默认配置
+### 6.修改webpack的默认配置
 默认情况下，vue-cli 3.0生成的项目，隐藏了webpack配置项，如果我们需要配置webpack
 需要通过vue.config.js来配置。
 在项目根目录中创建vue.config.js文件，
+
 ```
 module.exports = {
     chainWebpack:config=>{
@@ -109,9 +113,10 @@ module.exports = {
 chainWebpack可以通过链式编程的形式，修改webpack配置
 configureWebpack可以通过操作对象的形式，修改webpack配置
 
-###7.加载外部CDN
+### 7.加载外部CDN
 默认情况下，依赖项的所有第三方包都会被打包到js/chunk-vendors.******.js文件中，导致该js文件过大
 那么我们可以通过externals排除这些包，使它们不被打包到js/chunk-vendors.******.js文件中
+
 ```
 module.exports = {
     chainWebpack:config=>{
@@ -254,10 +259,11 @@ new Vue({
 </html>
 ```
 
-###8.定制首页内容
+### 8.定制首页内容
 开发环境的首页和发布环境的首页展示内容的形式有所不同
 如开发环境中使用的是import加载第三方包，而发布环境则是使用CDN，那么首页也需根据环境不同来进行不同的实现
 我们可以通过插件的方式来定制首页内容，打开vue.config.js，编写代码如下：
+
 ```
 module.exports = {
     chainWebpack:config=>{
@@ -307,7 +313,7 @@ module.exports = {
   .......
 ```
 
-###9.路由懒加载
+### 9.路由懒加载
 当路由被访问时才加载对应的路由文件，就是路由懒加载。
 路由懒加载实现步骤：
 1.安装 @babel/plugin-syntax-dynamic-import
@@ -374,13 +380,14 @@ const Report = () => import(/* webpackChunkName:"report" */ './components/report
 // import Report from './components/report/Report.vue'
 ```
 
-###10.项目上线
-####A.通过node创建服务器
+### 10.项目上线
+#### A.通过node创建服务器
 在vue_shop同级创建一个文件夹vue_shop_server存放node服务器
 使用终端打开vue_shop_server文件夹，输入命令 npm init -y
 初始化包之后，输入命令 npm i express -S
 打开vue_shop目录，复制dist文件夹，粘贴到vue_shop_server中
 在vue_shop_server文件夹中创建app.js文件,编写代码如下：
+
 ```
 const express = require('express')
 
@@ -394,10 +401,10 @@ app.listen(8998,()=>{
 ```
 然后再次在终端中输入  node app.js
 
-
-####B.开启gzip压缩
+#### B.开启gzip压缩
 打开vue_shop_server文件夹的终端，输入命令：npm i compression -D
 打开app.js,编写代码：
+
 ```
 const express = require('express')
 
@@ -412,11 +419,12 @@ app.listen(8998,()=>{
     console.log("server running at http://127.0.0.1:8998")
 })
 ```
-####C.配置https服务
+#### C.配置https服务
 配置https服务一般是后台进行处理，前端开发人员了解即可。
 首先，需要申请SSL证书，进入https://freessl.cn官网
 在后台导入证书，打开今天资料/素材，复制素材中的两个文件到vue_shop_server中
 打开app.js文件，编写代码导入证书，并开启https服务
+
 ```
 const express = require('express')
 const compression = require('compression')
@@ -442,7 +450,7 @@ https.createServer(options,app).listen(443)
 ```
 注意：因为我们使用的证书有问题，所以无法正常使用https服务
 
-####D.使用pm2管理应用
+#### D.使用pm2管理应用
 打开vue_shop_server文件夹的终端，输入命令：npm i pm2 -g
 使用pm2启动项目，在终端中输入命令：pm2 start app.js --name 自定义名称
 查看项目列表命令：pm2 ls

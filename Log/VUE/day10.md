@@ -1,16 +1,16 @@
-###今日目标
+### 今日目标
 1.完成商品分类 
 
 2.完成参数管理 
 
-
-###1.商品分类
-####A.新建分支goods_cate
+### 1.商品分类
+#### A.新建分支goods_cate
 新建分支goods_cate并推送到码云
 git checkout -b goods_cate
 git push -u origin goods_cate
-####B.创建子级路由
+#### B.创建子级路由
 创建categories子级路由组件并设置路由规则
+
 ```
 import Cate from './components/goods/Cate.vue'
 
@@ -22,8 +22,9 @@ path: '/home', component: Home, redirect: '/welcome', children: [
     { path: "/categories", component: Cate  }
 ]
 ```
-####C.添加组件基本布局
+#### C.添加组件基本布局
 在Cate.vue组件中添加面包屑导航以及卡片视图中的添加分类按钮
+
 ```
 <template>
     <div>
@@ -49,8 +50,9 @@ path: '/home', component: Home, redirect: '/welcome', children: [
     </div>
 </template>
 ```
-####D.请求分类数据
+#### D.请求分类数据
 请求分类数据并将数据保存在data中
+
 ```
 <script>
 export default {
@@ -91,7 +93,7 @@ export default {
 }
 </script>
 ```
-####E.使用插件展示数据
+#### E.使用插件展示数据
 使用第三方插件vue-table-with-tree-grid展示分类数据
     1).在vue 控制台中点击依赖->安装依赖->运行依赖->输入vue-table-with-tree-gird->点击安装
     2).打开main.js，导入vue-table-with-tree-grid
@@ -118,8 +120,9 @@ columns: [
 ]
 ```
 
-####F.自定义数据列
+#### F.自定义数据列
 使用vue-table-with-tree-grid定义模板列并添加自定义列
+
 ```
 //先在columns中添加一个列
 columns: [
@@ -148,7 +151,8 @@ columns: [
   <el-button size="mini" type="danger" icon="el-icon-delete">删除</el-button> 
 </template>
 ```
-####G.完成分页功能
+#### G.完成分页功能
+
 ```
 <!-- 分页 -->
 <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[3, 5, 10, 15]" :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total">
@@ -169,7 +173,8 @@ methods:{
   }
 }
 ```
-####H.完成添加分类
+#### H.完成添加分类
+
 ```
 ......
 <!-- 添加分类按钮区域 -->
@@ -305,7 +310,7 @@ methods:{
 
 ```
 
-####I.推送代码
+#### I.推送代码
 制作完添加分类之后，将代码提交到仓库，推送到码云,将goods_cate分支合并到master
 git add .
 git commit -m '完成商品分类'
@@ -313,10 +318,11 @@ git push
 git checkout master
 git merge goods_cate
 
-###2.参数管理
+### 2.参数管理
 只允许给三级分类内容设置参数，参数分为动态参数和静态参数属性
-####A.添加子级组件
+#### A.添加子级组件
 添加Params.vue子组件，并在router.js中引入该组件并设置路由规则
+
 ```
 import Params from './components/goods/Params.vue'
 ......
@@ -329,9 +335,10 @@ path: '/home', component: Home, redirect: '/welcome', children: [
   { path: "/params", component: Params  }
 ]
 ```
-####B.完成组件基本布局
+#### B.完成组件基本布局
 完成Params.vue组件的基本布局
 其中警告提示信息使用了el-alert，在element.js引入该组件并注册
+
 ```
 <template>
     <div>
@@ -360,8 +367,9 @@ path: '/home', component: Home, redirect: '/welcome', children: [
     </div>
 </template>
 ```
-####C.完成级联选择框
+#### C.完成级联选择框
 完成商品分类级联选择框
+
 ```
 <!-- 选择商品分类区域 -->
 <el-row class="cat_opt">
@@ -414,8 +422,9 @@ export default {
 }
 </script>
 ```
-####D.展示参数
+#### D.展示参数
 展示动态参数数据以及静态属性数据
+
 ```
 <!-- tab页签区域 -->
 <el-tabs v-model="activeName" @tab-click="handleTabClick">
@@ -513,8 +522,9 @@ export default {
     }
   }
 ```
-####E.添加参数
+#### E.添加参数
 完成添加参数或属性
+
 ```
 <!-- 添加参数或属性对话框 -->
 <el-dialog :title="'添加'+titleText" :visible.sync="addDialogVisible" width="50%" @close="addDialogClosed">
@@ -572,8 +582,9 @@ export default {
     }
   }
 ```
-####F.编辑参数
+#### F.编辑参数
 完成编辑参数或属性
+
 ```
 <!-- 修改参数或属性对话框 -->
 <el-dialog :title="'修改'+titleText" :visible.sync="editDialogVisible" width="50%" @close="editDialogClosed">
@@ -643,8 +654,9 @@ export default {
   }
 ```
 
-####G.删除参数
+#### G.删除参数
 删除参数或属性
+
 ```
 给两个删除按钮添加事件
 <el-button size="mini" type="danger" icon="el-icon-delete" @click="removeParams(scope.row.attr_id)">删除</el-button>

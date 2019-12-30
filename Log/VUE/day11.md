@@ -1,13 +1,14 @@
-###今日目标
+### 今日目标
 1.完成参数管理 
 2.推送代码到码云
 3.制作商品列表页面
 4.制作商品添加页面
 
-###1.参数管理
-####A.展示动态参数可选项
+### 1.参数管理
+#### A.展示动态参数可选项
 动态参数可选项展示及操作
 在获取动态参数的方法中进行处理。
+
 ```
 //将获取到的数据中的attr_vals字符串转换为数组
 res.data.forEach(item => {
@@ -57,8 +58,9 @@ showInput(row){
 }
 ```
 
-####B.添加/删除可选项
+#### B.添加/删除可选项
 添加/删除动态参数可选项
+
 ```
 给el-tag添加删除事件
 <el-tag v-for="(item,i) in scope.row.attr_vals" :key="i" closable @close="handleClose(i,scope.row)">{{item}}</el-tag>
@@ -129,10 +131,11 @@ async handleChange() {
 git checkout -b goods_list
 推送至码云 git push -u origin goods_list
 
-###3.商品列表
+### 3.商品列表
 ####A.制作商品列表基本结构
 添加子级路由组件以及对应的规则,并设置组件的基本机构
 打开router.js,添加下面的代码
+
 ```
 import GoodList from './components/goods/List.vue'
 
@@ -187,9 +190,10 @@ export default {
 </style>
 ```
 
-####B.数据展示
+#### B.数据展示
 添加数据表格展示数据以及分页功能的实现,搜索功能的实现
 在main.js中添加过滤器：
+
 ```
 //创建过滤器将秒数过滤为年月日，时分秒
 Vue.filter('dateFormat',function(originVal){
@@ -295,7 +299,8 @@ export default {
 </script>
 ```
 
-####C.实现删除商品
+#### C.实现删除商品
+
 ```
 //绑定按钮点击事件
 <el-button size="mini" type="danger" icon="el-icon-delete" @click="removeGoods(scope.row.goods_id)"></el-button>
@@ -331,9 +336,10 @@ async removeGoods(goods_id) {
 }
 ```
 
-###4.添加商品
-####A.添加编程式导航
+### 4.添加商品
+#### A.添加编程式导航
 在List.vue中添加编程式导航，并创建添加商品路由组件及规则
+
 ```
 //在List.vue中添加编程式导航
 <el-col :span="4">
@@ -359,8 +365,9 @@ path: '/home', component: Home, redirect: '/welcome', children: [
 ]
 ```
 
-####B.布局Add.vue组件
+#### B.布局Add.vue组件
 布局过程中需要使用Steps组件，在element.js中引入并注册该组件，并在global.css中给组件设置全局样式
+
 ```
 import {Steps,Step} from 'element-ui'
 Vue.use(Step)
@@ -511,8 +518,9 @@ export default {
 <style lang="less" scoped>
 </style>
 ```
-####C.添加tab栏切换验证
+#### C.添加tab栏切换验证
 也就是说不输入某些内容，无法切换到别的tab栏
+
 ```
 //首先给tabs添加tab切换前事件
 <el-tabs v-model="activeIndex" :tab-position="'left'" :before-leave="beforeTabLeave">
@@ -544,7 +552,7 @@ beforeTabLeave(activeName,oldActiveName){
 }
 ```
 
-####D.展示信息
+#### D.展示信息
 展示商品参数信息,商品属性信息
 在商品参数信息展示中使用的el-checkbox,el-checkbox-group组件，打开element.js引入组件并注册组件
 ```

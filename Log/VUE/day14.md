@@ -1,11 +1,11 @@
-###今日目标
+### 今日目标
 1.Vuex概述
 
 2.Vuex基本使用
 
 3.使用Vuex完成todo案例
 
-###1.Vuex概述
+### 1.Vuex概述
 Vuex是实现组件全局状态（数据）管理的一种机制，可以方便的实现组件之间的数据共享
 
 使用Vuex管理数据的好处：
@@ -13,7 +13,7 @@ A.能够在vuex中集中管理共享的数据，便于开发和后期进行维�
 B.能够高效的实现组件之间的数据共享，提高开发效率
 C.存储在vuex中的数据是响应式的，当数据发生改变时，页面中的数据也会同步更新
 
-###2.Vuex的基本使用
+### 2.Vuex的基本使用
 创建带有vuex的vue项目，打开终端，输入命令：vue ui
 当项目仪表盘打开之后，我们点击页面左上角的项目管理下拉列表，再点击Vue项目管理器
 点击创建项目，如下图所示
@@ -27,8 +27,9 @@ C.存储在vuex中的数据是响应式的，当数据发生改变时，页面�
 第四步，创建项目
 ![](images/创建vuex项目05.png)
 
-###3.使用Vuex完成计数器案例
+### 3.使用Vuex完成计数器案例
 打开刚刚创建的vuex项目，找到src目录中的App.vue组件，将代码重新编写如下：
+
 ```
 <template>
   <div>
@@ -106,20 +107,22 @@ export default {
 }
 ```
 
-###4.Vuex中的核心特性
-####A.State
-    State提供唯一的公共数据源，所有共享的数据都要统一放到Store中的State中存储
-    例如，打开项目中的store.js文件，在State对象中可以添加我们要共享的数据，如：count:0
-    
+### 4.Vuex中的核心特性
+#### A.State
+​    State提供唯一的公共数据源，所有共享的数据都要统一放到Store中的State中存储
+​    例如，打开项目中的store.js文件，在State对象中可以添加我们要共享的数据，如：count:0
+​    
+
     在组件中访问State的方式：
     1).this.$store.state.全局数据名称  如：this.$store.state.count
     2).先按需导入mapState函数： import { mapState } from 'vuex'
     然后数据映射为计算属性： computed:{ ...mapState(['全局数据名称']) }
 
-####B.Mutation
+#### B.Mutation
 Mutation用于修改变更$store中的数据
 使用方式：
 打开store.js文件，在mutations中添加代码如下
+
 ```
 mutations: {
     add(state,step){
@@ -175,12 +178,12 @@ export default {
 
 
 
-
-####C.Action
+#### C.Action
 在mutations中不能编写异步的代码，会导致vue调试器的显示出错。
 在vuex中我们可以使用Action来执行异步操作。
 操作步骤如下：
 打开store.js文件，修改Action，如下：
+
 ```
 actions: {
   addAsync(context,step){
@@ -236,11 +239,11 @@ export default {
 }
 ```
 
-
-####D.Getter
+#### D.Getter
 Getter用于对Store中的数据进行加工处理形成新的数据
 它只会包装Store中保存的数据，并不会修改Store中保存的数据，当Store中的数据发生变化时，Getter生成的内容也会随之变化
 打开store.js文件，添加getters，如下：
+
 ```
 export default new Vuex.Store({
   .......
@@ -254,17 +257,17 @@ export default new Vuex.Store({
 ```
 然后打开Addition.vue中，添加插值表达式使用getters
 <h3>{{$store.getters.showNum}}</h3>
-
 或者也可以在Addition.vue中，导入mapGetters，并将之映射为计算属性
 import { mapGetters } from 'vuex'
 computed:{
   ...mapGetters(['showNum'])
 }
 
-###5.vuex案例
-####A.初始化案例
+### 5.vuex案例
+#### A.初始化案例
 首先使用vue ui初始化一个使用vuex的案例
 然后打开public文件夹，创建一个list.json文件，文件代码如下：
+
 ```
 [
     {
@@ -427,8 +430,9 @@ export default {
 }
 </style>
 ```
-####B.完成添加事项
+#### B.完成添加事项
 首先，打开App.vue文件，给“添加事项”按钮绑定点击事件，编写处理函数
+
 ```
 //绑定事件
 <a-button type="primary" @click="addItemToList">添加事项</a-button>
@@ -478,8 +482,9 @@ export default new Vuex.Store({
 
 ```
 
-####C.完成删除事项
+#### C.完成删除事项
 首先，打开App.vue文件，给“删除”按钮绑定点击事件，编写处理函数
+
 ```
 //绑定事件
 <a slot="actions" @click="removeItemById(item.id)">删除</a>
@@ -510,8 +515,9 @@ export default new Vuex.Store({
 })
 ```
 
-####D.完成选中状态的改变
+#### D.完成选中状态的改变
 首先，打开App.vue文件，给“复选”按钮绑定点击事件，编写处理函数
+
 ```
 //绑定事件
 <a-checkbox :checked="item.done" @change="cbStateChanged(item.id,$event)">{{item.info}}</a-checkbox>
@@ -547,8 +553,9 @@ export default new Vuex.Store({
 })
 ```
 
-####E.剩余项统计
+#### E.剩余项统计
 打开store.js，添加getters完成剩余项统计
+
 ```
 getters:{
   unDoneLength(state){
@@ -573,8 +580,9 @@ computed:{
 }
 ```
 
-####F.清除完成事项
+#### F.清除完成事项
 首先，打开App.vue文件，给“清除已完成”按钮绑定点击事件，编写处理函数
+
 ```
 <!-- 把已经完成的任务清空 -->
 <a @click="clean">清除已完成</a>
@@ -602,9 +610,10 @@ export default new Vuex.Store({
 })
 ```
 
-####G.点击选项卡切换事项
+#### G.点击选项卡切换事项
 打开App.vue，给“全部”，“未完成”，“已完成”三个选项卡绑定点击事件，编写处理函数
 并将列表数据来源更改为一个getters。
+
 ```
 <a-list bordered :dataSource="infoList" class="dt_list">
   ......
