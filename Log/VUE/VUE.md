@@ -1,3 +1,70 @@
+### VUE生命周期
+
+```shell
+new Vue({
+            el: '#app',
+            data: {
+                msg: 'dream'
+            },
+            methods: {
+                show(){
+                    console.log('show');
+                }
+            },
+            beforeCreate () {
+                //data和methods中的数据还没有初始化完成，不能使用
+            },
+            created () {
+				//data和methods中的数据初始化完成，最早只能在这里调用
+            },
+            beforeMount () {
+            	//页面在内存中渲染完毕，但并没有渲染到页面上
+            },
+            mounted () {
+				//页面渲染完毕，初始化完毕，可以对页面的dom元素进行操作
+            },
+            beforeUpdate () {
+				//model中的数据已经更新，但是页面并没有从新渲染
+            },
+            updated () {
+				//页面重新渲染完毕
+            },
+            beforeDestroy () {
+                //销毁之前，但是data、methods都还没有销毁
+            },
+            destroyed () {
+                //vue实例被销毁
+            }
+        })
+```
+
+### VUE基础结构
+
+```shell
+new Vue({
+			//用于挂在要管理的元素
+            el: '#app',
+            //定义数据
+            data: {
+                msg: 'dream'
+            },
+            //定义方法
+            methods: {
+                show() {
+                    console.log('show');
+                }
+            },
+            //计算属性 :和methods的区别在于，多次调用时，computed有缓存不需要重复执行
+            computed: {
+            	total() {
+            		return this.a + this.b
+            	}
+            }	
+        })
+```
+
+
+
 ### 1.开发前的配置
 
 + Vue脚手架的安装

@@ -103,7 +103,7 @@ let a = '张三'
 let b = `my name is ${a}`  //my name is 张三
 ```
 
-##### 2. startswith和endswith
+##### 2. startSwith和endSwith
 
 ​	`str.startsWith('hello')`判断字符串是否已**hello**开头，返回ture或false
 
@@ -172,3 +172,36 @@ let b = `my name is ${a}`  //my name is 张三
 #### 7.Promise的应用
 
 ​	
+
+#### 8.async和await
+
+​	使用**async**修饰的函数，返回的是一个**promise**对象
+
+#### 9. generator
+
+```shell
+需要使用 * 对函数名修饰
+每next（）一次就会执行段代码
+function *name() {
+            console.log(1);
+            //a等于next（）传进来的10，同时将return a 返回回去
+            let a = yield 'return a'
+            console.log(2 + a);
+            //a等于next（）传进来的10，同时将return b 返回回去
+            let b = yield 'return b'
+            console.log(3 + b);
+        }
+        let a = name()
+        //10会传递到函数内部，但第一次next（）可以理解为启动函数，内部接收不到参数
+        let one = a.next(10)
+        //20会被第一个yield接收到，同时接收到返回的对象，one是一个包含value:return a的对象
+        let tow = a.next(20)
+        //30会被第二个yield接收到，同时接收到返回的对象，two是一个包含value:return b的对象
+        let three = a.next(30)
+        console.log(one, tow, three);
+```
+
+#### 10. Map数据结构
+
+#### 11. fetch
+
