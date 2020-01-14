@@ -1,3 +1,5 @@
+## VUE学习
+
 ### VUE生命周期
 
 ```shell
@@ -59,13 +61,44 @@ new Vue({
             	total() {
             		return this.a + this.b
             	}
-            }	
+            }，
+            //对传入的数据进行处理 使用：{{num | filterNum}}
+            filters: {
+            	filterNum(num){
+            		return num.toFixed(2)
+            	}
+            }
+            
         })
 ```
 
+### VUE基础
+
+#### ：key的作用
+
+​	更高效的利用虚拟DOM，不建议使用index下标，因为插入数据时下标并不是一一对应的。
 
 
-### 1.开发前的配置
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## vue开发
+
+#### 1.开发前的配置
 
 + Vue脚手架的安装
   
@@ -84,7 +117,7 @@ new Vue({
   ```
   
 
-### 2.element ui 使用时遇到的问题
+#### 2.element ui 使用时遇到的问题
 
 1. form 表单组件中 prop验证规则需要和v-model绑定的名字一致
 

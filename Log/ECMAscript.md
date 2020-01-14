@@ -12,11 +12,19 @@
 
 #### 1. this的指向
 
+#### 2. splice( )
+
+​	`arr.aplice(1)` //只填一个元素，则删除第n个后面的所有
+
+​	`arr.aplice(1,3)`// 删除第一个后边的三个元素
+
+​	`arr.aplice(1,3,'a','b)`//第二个后边为替换的元素
+
+#### 3.toFixed( )
 
 
 
-
-## ES6
+## ES6 
 
 #### 1. 箭头函数
 
@@ -58,7 +66,9 @@
 
 ##### 5. sort( )
 
-​	`arr.sort((a, b) => a -b)` `srr.sort((a, b) => a + b)`
+ 	`arr.sort((a, b) => a -b)`
+
+​	 `arr.sort((a, b) => a + b)`
 
 ​	对数组进行排序，a - b 正序，a + b倒叙
 
@@ -70,11 +80,20 @@
 
 ##### 7. reduce( )
 
+```shel
+//reduce()需要传入两个元素，第一个是一个方法，方法中也需要两个参数，prevalue是指上一次遍历的返回值，如果是第一次遍历使用的则是reduce()中传入的第二个元素，item是每次的遍历项，第二个元素就是prevalue的初始值
+arr.reduce(function(preValue, item){
+	return preValue + item
+},0)
+
+arr.reduce((preValue, item) => preValue + item)
+```
+
 ##### 8. filter( )
 
-​	`let narr = arr,filter(item => item = 3)`
+​	`let arr = arr,filter(item => item = 3)`
 
-​	filter( ) 只会返回满足条件的值
+​	filter( ) 只会返回满足条件的值,判断是**turn**还是**false**，turn则把本次item加入arr中
 
 ##### 9. forEach( )
 
