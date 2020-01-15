@@ -1,6 +1,6 @@
-## VUE学习
+## Vue学习
 
-### VUE生命周期
+### Vue生命周期
 
 ```shell
 new Vue({
@@ -40,7 +40,7 @@ new Vue({
         })
 ```
 
-### VUE基础结构
+### Vue基础结构
 
 ```shell
 new Vue({
@@ -67,17 +67,203 @@ new Vue({
             	filterNum(num){
             		return num.toFixed(2)
             	}
+            }，
+            //创建组件 cpn:组件名，cont：通过组件构造器定义的模板
+            components: {
+            	cpn: cont
             }
             
         })
 ```
 
-### VUE基础
+### Vue基础
 
-#### ：key的作用
+#### 1.：key的作用
 
 ​	更高效的利用虚拟DOM，不建议使用index下标，因为插入数据时下标并不是一一对应的。
 
+#### 2. v-model修饰符
+
+##### lazy
+
+`v-model.lazy`
+
+双向绑定的数据不会实时同步，而是在离焦后同步
+
+##### number
+
+`v-model.number`
+
+输入的数据转换为number类型
+
+##### trim
+
+`v-model.trim`
+
+去除字符串两侧的空格
+
+#### 3.组件中data必须是一个函数
+
+是一个函数，同时return{数据}，才能重复的使用此组件；
+
+data：{数据}，这种方法多次使用时，指向的会是同一个实例，无法复用；
+
+
+
+### Vue组件化
+
+#### 1. 组件的注册，父子组件嵌套
+
+```vue
+		//创建子组件构造器
+		const spnt2 = Vue.extend({
+            template:  `
+                <div>
+                    <p>子组件</p>
+                </div>
+            `
+        });
+		//父组件构造器  ！：在父组件中使用子组件时，子组件需要在前面构造完成，否则会报错
+        const cpnt1 = Vue.extend({
+            template: `
+                <div>
+                    父组件
+                        <spnc2></spnc2>
+                    父组件
+                </div>
+            `,
+			//注册组件
+            components: {
+                spnc2: spnt2
+            }
+        });
+		new Vue({
+			el: "#app",
+			data: {
+
+			},
+			methods: {
+	
+			},
+			//注册组件（根组件）
+			conponents: {
+				cpnc1: cpnt1
+			}
+		})
+```
+
+```vue
+Vue.component('cpn3',{
+	template:`
+		<div>
+            语法糖注册全局组件
+		</div>
+	`
+})
+```
+
+```vue
+const ccc = new Vue({
+            el: '#app',
+            data: {
+   
+            }
+            components: {
+                cpnc1: {
+                    template: `
+                        <div>
+                            语法糖注册局部组件
+                        </div>
+                    `
+                }
+            }
+        })
+```
+
+#### 2. 组件模板的分离写法
+
+```vue
+//将组件需要用到的html模板抽离到script中，type类型为 text/x-template
+<script type="text/x-template" id="tem1">
+       <div>组件html抽离写法</div>
+</script>
+//使用id对组件进行注册
+Vue.component('cpn3',{
+	template: '#tem1'
+})
+```
+
+#### 3. 组件如何访问Vue实例中的数据
+
+​	组件不能直接访问vue实例data中的数据
+
+##### 组件传值：父传子
+
+```vue
+<div id="app">
+    	//data实例中arr使用v-bind绑定到datac上，在子组件props中接收
+        <cpn1 :datac="arr"></cpn1>
+    </div>
+    <!-- <template id="tem1">
+        <div>
+            <div>组件html抽离写法muabn1</div>
+            <h1>{{ datac }}</h1>
+        </div>       
+    </template> -->
+    <script type="text/x-template" id="tem1">
+        <div>
+            <div>组件html抽离写法muabn1</div>
+            <h1>{{ datac }}</h1>
+        </div>     
+    </script>
+    <script>
+        //创建模板子组件
+        const cpn1 = {
+            template: '#tem1',
+            //第一种 ！props中命名如果使用驼峰命名使用会比较麻烦，需要用-隔开
+            props: ['datac','bb','cc'],
+            //第二种
+            props: {
+            	datac: String,
+            	bb: Array，
+                cc: Object
+        	},
+           	//第三种
+            props： {
+        		datac: {
+            		//限制类型
+            		type:String,
+            		//没有传入参数时的默认值
+            		default: 'aaaa',
+            		//是否为必传项
+            		required: true
+        		},
+              	cc: {
+                    //限制类型
+            		type: Object,
+            		//没有传入参数时的默认值
+            		default() {
+                      return{
+                          当类型为Object时，default写法
+                      }  
+                    },
+            		//是否为必传项
+            		required: true
+                }
+        	}
+        }
+        const ccc = new Vue({
+            el: '#app',
+            data: {
+                arr: '橙子',
+                arr2: []
+            },
+            //注册组件，不改变名字时，可以直接将子组件名字写入
+            components: {
+                cpn1
+            },
+        })
+```
 
 
 
@@ -95,8 +281,7 @@ new Vue({
 
 
 
-
-## vue开发
+## Vue开发
 
 #### 1.开发前的配置
 
