@@ -1,0 +1,85 @@
+/* pages/goods_detail/goods_detail.wxss */
+.detail_swiper{
+    height: 70vw;
+    text-align:center;
+}
+.detail_swiper image{
+    width: 60%;
+}
+.goods_price{
+    font-size: 32rpx;
+    color: var(--themeColor);
+    padding: 10rpx;
+    font-weight: 600;
+}
+.goods_name_row{
+    display: flex;
+    font-size: 30rpx;
+}
+.goods_name{
+    flex: 5;
+    padding: 0 15rpx;
+}
+.goods_name_right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-left: 1rpx solid black;
+}
+.goods_detail_title{
+    font-size: 36rpx;
+    font-weight: 600;
+    color: var(--themeColor);
+    padding: 20rpx;
+    margin-top: 20rpx;
+    box-shadow:  #eeeeee 5rpx 0px 5rpx 4rpx;
+}
+.goods_rich{
+    border-top: 1px solid black;
+    margin-top: 20rpx;
+}
+.btm_tool{
+    display: flex;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 90rpx;
+    background: #fff;
+}
+.tool_item{
+    font-size: 24rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+}
+.tool_gm,
+.tool_join{
+    flex: 2;
+    line-height: 90rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 30rpx;
+    font-weight: 600;
+}
+.tool_gm{
+    background: orange;
+}
+.tool_join{
+    background: var(--themeColor);
+}
+.tool_item button{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+}

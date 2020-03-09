@@ -1,0 +1,45 @@
+<!--pages/pay/pay.wxml-->
+<!-- pages/cart/cart.wxml -->
+<view class="cart_content">
+    <view class="address_list">
+        <view class="address_name">
+            <view class="name_l">收货人：{{address.userName}}</view>
+            <view class="name_r">{{address.telNumber}}</view>
+        </view>
+        <view class="address_con">{{address.all}}</view>
+    </view>
+        <view class="cart_con">
+        <view class="cart_list" wx:for="{{cart}}" wx:key="goods_id">
+            <navigator class="list_img">
+                <image src="{{item.pics[0].pics_mid}}" mode="widthFix"></image>
+            </navigator>
+            <view class="list_detail">
+                <view class="detail_text">
+                    {{item.goods_name}}
+                </view>
+                <view class="detail_price">
+                    <view class="price_price">￥{{item.goods_price}}</view>
+                    <view class="price_num">
+                        <view class="now_num">X {{item.num}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        </view>
+    
+    <view class="cart_btm_bar">
+        <view class="cart_total">
+            <view class="total_top">
+                合计：<text>￥{{money}}</text>
+            </view>
+            <view class="total_btm">
+                包含运费
+            </view>              
+        </view>
+        <view class="cart_jiezhang" bind:tap="handlePay">
+            付款({{total}})
+        </view>
+          
+    </view>
+      
+</view>

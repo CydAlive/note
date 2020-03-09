@@ -190,11 +190,51 @@ let b = `my name is ${a}`  //my name is 张三
 
 #### 7.Promise的应用
 
-​	
+​	**Promise**是**异步编程**的一种解决方案，可以解决**回调地狱**问题
+
+##### 1. 基础应用
+
+Promise实例需要传入两个形参，resolve和reject，可以在内部进行进行判断什么时候执行相应的函数，
+
+Promise实例可以使用 **.then** 进行链式编程，在Promise中的resolve被执行时就会执行 **.then** 中传入的函数；
+
+​					同理 **.catch** 会在reject执行时执行其内部传入的函数
+
+图一：使用**.then  .catch** 判断
+
+![1581229753283](C:\Users\懂丶\AppData\Roaming\Typora\typora-user-images\1581229753283.png)
+
+图二： 在 **.then** 中传入两个函数，第一个会在 resolve 执行时执行，第二个会在 reject 执行时执行（这种方法不需要再使用  **.catch**）
+
+![1581230399963](C:\Users\懂丶\AppData\Roaming\Typora\typora-user-images\1581230399963.png)
+
+##### 2. 链式调用
+
+then 中  return 的返回值，可以继续使用 .then接收
+
+![1581232855843](C:\Users\懂丶\AppData\Roaming\Typora\typora-user-images\1581232855843.png)
+
+##### 3. Promise.all( )
+
+在多个异步操作完成后才能继续执行的时候，可以使用这种方式
+
+.then 会在所有[ ]中的promise执行后触发
+
+![1581234162283](C:\Users\懂丶\AppData\Roaming\Typora\typora-user-images\1581234162283.png)
 
 #### 8.async和await
 
 ​	使用**async**修饰的函数，返回的是一个**promise**对象
+
+```js
+正常返回的promise需要用.then接受到返回的数据，而使用async修饰过的函数(方法)，在异步操作前添加await，会等待异步操作结束后继续向下执行，同时会直接返回数据
+async getData() {
+    //在这里会等待，直到data接收到返回的数据
+    const data = await wx.request({url:'/home'})
+}
+```
+
+
 
 #### 9. generator
 
