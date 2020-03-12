@@ -1,5 +1,11 @@
 ### 1.创建web服务器
 
+node  index.js(文件名) 运行nodejs文件
+
+加载使用 require
+
+导出使用 export
+
 ```shell
   // 引用系统模块
  const http = require('http');
@@ -39,7 +45,15 @@ app.on('request', (req, res) => {
 请求内容类型
 
 + text/html
+
 + text/css
+
 + application/javascript
+
 + image/jpeg
+
 + application/json
+
+  
+
+### 2.接收post请求参数

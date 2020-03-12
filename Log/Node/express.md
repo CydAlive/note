@@ -2,7 +2,7 @@
 
 + npm init
 + npm install  express
-+ npm install -global nodemon 无需重启刷新服务器
++ npm install -global nodemon 无需重启刷新服务器 ：使用nodemon index.js(文件名)启动文件
 + npm install  art-template
 + npm install  express-are-template
   
@@ -149,6 +149,9 @@ localhost:3000/find/123
 通过Express内置的**express.static**可以方便地托管静态文件，例如img、CSS、JavaScript 文件等。
 
 ```shell
+//当以/public/开头请求的时候，去./public/文件夹查找
+app.use('/public/',express.static('./public/'));
+//省略第一个参数，会直接公开public文件夹
 app.use(express.static('public'));
 ```
 
@@ -160,12 +163,12 @@ app.use(express.static('public'));
 ```shell
   // 当渲染后缀为art的模板时 使用express-art-template
  app.engine('art', require('express-art-template'));
-  // 设置模板存放目录
+  // 设置模板存放目录（不设置时默认就是views目录）
  app.set('views', path.join(__dirname, 'views'));
   // 渲染模板时不写后缀 默认拼接art后缀
  app.set('view engine', 'art');
  app.get('/', (req, res) => {
-     // 渲染模板 index:模板，后面的对象填入数据，在模板文件中可以直接只用填入的数据
+     // 渲染模板 index:模板，后面的对象填入数据，在模板文件中可以直接使用填入的数据
      res.render('index',{
      	msg:'message'
      });

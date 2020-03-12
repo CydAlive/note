@@ -10,7 +10,7 @@
 + 使用Node.js操作MongoDB数据库需要依赖Node.js第三方包mongoose
 + 使用**npm install mongoose**命令下载
 + 在命令行工具中运行**net start mongoDB**即可启动MongoDB，否则MongoDB将无法连接。
-+ 使用 **net start mongoDB** 关闭数据库
++ 使用 **net stop mongoDB** 关闭数据库
 
 #### 2.1数据库连接
 
