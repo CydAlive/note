@@ -154,6 +154,7 @@ User.updateMany({查询条件}, {要更改的值}).then(result => console.log(re
 + trim: true 去除字符串两边的空格
 + validate: 自定义验证器
 + default: 默认值
++ unique：true 此字段不能重复
 
 #### 2.9获取错误信息
 

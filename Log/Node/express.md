@@ -116,7 +116,7 @@ app.use('/admin', (req, res, next) => {
  });
 ```
 
-	#### 4.2 POST参数的获取
+#### 4.2 POST参数的获取
 
 Express中接收post请求参数需要借助第三方包 body-parser,首先使用命令行下载包，引入之后需要进行配置，通过req.body可以获取到请求数据：
 
